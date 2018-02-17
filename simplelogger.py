@@ -14,15 +14,15 @@ import traceback
 import re
 import os
 
-if 'logger' not in globals():
-    logger = logging.getLogger('cryptdomainmgr')
-    loglevelStr = os.getenv('LOGLEVEL', default='INFO')
-    loglevelDict = {'DEBUG': logging.DEBUG, 'INFO': logging.INFO, 'WARN': logging.WARN, 'ERROR': logging.ERROR, 'CRITICAL': logging.CRITICAL}
-    loglevel = loglevelDict[loglevelStr]
-    logger.setLevel(loglevel)
-    formatter = logging.Formatter('[%(asctime)s]    %(levelname)-9s %(message)s')
-    ch = logging.StreamHandler()
-    ch.setFormatter(formatter)
+logger = logging.getLogger('cryptdomainmgr')
+loglevelStr = os.getenv('LOGLEVEL', default='INFO')
+loglevelDict = {'DEBUG': logging.DEBUG, 'INFO': logging.INFO, 'WARN': logging.WARN, 'ERROR': logging.ERROR, 'CRITICAL': logging.CRITICAL}
+loglevel = loglevelDict[loglevelStr]
+logger.setLevel(loglevel)
+formatter = logging.Formatter('[%(asctime)s]    %(levelname)-9s %(message)s')
+ch = logging.StreamHandler()
+ch.setFormatter(formatter)
+if 1 > len(logger.handlers):
     logger.addHandler(ch)
 
 def log(msg, options = ['showlocation']):
