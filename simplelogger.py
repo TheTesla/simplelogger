@@ -15,7 +15,7 @@ import re
 
 logger = logging.getLogger('cryptdomainmgr')
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(levelname)s    [%(asctime)s]    %(message)s')
+formatter = logging.Formatter('[%(asctime)s]    %(levelname)-9s %(message)s')
 ch = logging.StreamHandler()
 ch.setFormatter(formatter)
 logger.addHandler(ch)
