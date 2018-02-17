@@ -12,9 +12,14 @@ from deepops import passwordFilter
 import logging
 import traceback
 import re
+import os
+
 
 logger = logging.getLogger('cryptdomainmgr')
-logger.setLevel(logging.DEBUG)
+loglevelStr = os.getenv('LOGLEVEL', default='INFO')
+loglevelDict = {'DEBUG': logging.DEBUG, 'INFO': logging.INFO, 'WARN': logging.WARN, 'ERROR': logging.ERROR, 'CRITICAL': logging.CRITICAL}
+loglevel = loglevelDict[loglevelStr]
+logger.setLevel(loglevel)
 formatter = logging.Formatter('[%(asctime)s]    %(levelname)-9s %(message)s')
 ch = logging.StreamHandler()
 ch.setFormatter(formatter)
