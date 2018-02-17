@@ -20,22 +20,27 @@ ch = logging.StreamHandler()
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
-def log(msg):
-    trc = traceback.extract_stack()
-    return '{}/{}()/{}:    {}'.format(trc[-3][0], trc[-3][2], re.search('[^\(]*\((.*)\)', trc[-3][3]).group(1), passwordFilter(msg))
+def log(msg, options = ['showlocation']):
+    if 'notfilterpassword' not in options:
+        msg = passwordFilter(msg)
+    if 'showlocation' in options:
+        trc = traceback.extract_stack()
+        return '{}/{}()/{}:    {}'.format(trc[-3][0], trc[-3][2], re.search('[^\(]*\((.*)\)', trc[-3][3]).group(1), msg)
+    else:
+        return msg 
 
-def debug(msg):
-    logger.debug(log(msg))
+def debug(msg, options = ['showlocation']):
+    logger.debug(log(msg, options))
 
-def info(msg):
-    logger.info(log(msg))
+def info(msg, options = []):
+    logger.info(log(msg, options))
 
-def warn(msg):
-    logger.warn(log(msg))
+def warn(msg, options = []):
+    logger.warn(log(msg, options))
 
-def error(msg):
-    logger.error(log(msg))
+def error(msg,options = []):
+    logger.error(log(msg, options))
 
-def critical(msg):
-    logger.critical(log(msg))
+def critical(msg, options = []):
+    logger.critical(log(msg, options))
 
